@@ -14,11 +14,8 @@
   Airport.create(code: @code)
 end
 
-@airports = Airport.all
-
 20.times do
-  day = 60*60*24
-  departure_time = Time.now+rand(10).days
+  departure_time = Time.now+(rand(10).days)
   duration = (1..5).to_a.sample
   from_port = (1..20).to_a.sample
   to_port = (1..20).to_a.sample
