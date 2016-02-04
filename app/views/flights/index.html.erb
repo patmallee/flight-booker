@@ -1,0 +1,19 @@
+<div class="search container">
+  <%= form_for @flight, method: :get do |f| %>
+    <%= f.label :from_airport_id %>
+    <%= f.select(:from_airport_id, options_for_select(@airports)) %><br>
+    
+    <%= f.label :to_airport_id %>
+    <%= f.select(:to_airport_id, options_for_select(@airports)) %><br>
+    
+    <%= f.fields_for :passengers do |p| %>
+      <%= p.label :count %>
+      <%= p.select(:count, options_for_select([['1',1],['2',2],['3',3],['4',4]])) %><br>
+    <% end %>
+    
+    <%= f.label :depart_time %>
+    <%= f.select(:depart_time, options_for_select(@departures)) %><br>
+    
+    <%= f.submit "Search" %>
+  <% end %>
+</div>
