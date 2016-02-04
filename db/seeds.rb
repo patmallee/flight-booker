@@ -6,12 +6,22 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-
-
 20.times do
   @code = ""
   3.times do
     @code += ('A'..'Z').to_a.sample
   end
   Airport.create(code: @code)
+end
+
+@airports = Airport.all
+
+20.times do
+  day = 60*60*24
+  departure_time = Time.now+3.days
+  duration = (1..5).to_a.sample
+  from_port = (1..20).to_a.sample
+  to_port = (1..20).to_a.sample
+  Flight.create(depart_time: departure_time, duration: duration,
+                from_airport_id: from_port, to_airport_id: to_port)
 end
