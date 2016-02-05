@@ -13,6 +13,10 @@ class FlightsController < ApplicationController
     end
   end
   
+  def new
+    
+  end
+  
   private
   
     def searched
@@ -21,7 +25,7 @@ class FlightsController < ApplicationController
   
     def search_params
       params.require(:flight).permit(:depart_time, :from_airport_id, :to_airport_id,
-                                     passengers: [:count])
+                                     passengers: [:count], booking: [:selection])
     end
   
 end
