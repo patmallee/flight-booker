@@ -23,10 +23,22 @@
 
 <div style="margin: 0 30px; padding: 0 0 0 10px; box-shadow: 0 0 3px 3px #aaa; border-radius: 4px">
   <% unless @search_results.nil? %>
-    <h2>Search Results --- Passengers: <%= @passenger_count %></h2>
-    <% @search_results.each do |flight| %>
-      <h3>Departing: <%= flight.depart_time.strftime("%b %d, %Y - %l:%M %P") %></h3>
-      <p><strong>Route:</strong> <%= flight.from_airport.code %>-<%= flight.to_airport.code %></p>
-    <% end %>
+      <h2>Search Results --- Passengers: <%= @passenger_count %></h2>
+      
+      <%= form_for @flight do |f| %>
+        
+        <%= fields_for :booking do |b| %>
+          <% @search_results.each do |flight| %>
+            <%= b.radio_button(:selection, flight.id) %>
+              <div style="display:inline">
+                <h3>Departing: <%= flight.depart_time.strftime("%b %d, %Y - %l:%M %P") %></h3>
+                <p><strong>Route:</strong> <%= flight.from_airport.code %>-<%= flight.to_airport.code %></p>
+              </div>
+          <% end %>
+        <% end %>
+        
+        <%= f.submit "Book Flight" %>
+        
+      <% end %>
   <% end %>
 </div>
