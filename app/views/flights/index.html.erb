@@ -19,9 +19,11 @@
   <% end %>
 </div>
 
-<div>
-  <% if @search_results.any? %>
-    <h2>Passengers: <%= @passenger_count %></h2>
+<p><%= @boobs %></p>
+
+<div style="margin: 0 30px; padding: 0 0 0 10px; box-shadow: 0 0 3px 3px #aaa; border-radius: 4px">
+  <% unless @search_results.nil? %>
+    <h2>Search Results --- Passengers: <%= @passenger_count %></h2>
     <% @search_results.each do |flight| %>
       <h3>Departing: <%= flight.depart_time.strftime("%b %d, %Y - %l:%M %P") %></h3>
       <p><strong>Route:</strong> <%= flight.from_airport.code %>-<%= flight.to_airport.code %></p>
