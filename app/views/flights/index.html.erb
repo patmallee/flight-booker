@@ -1,6 +1,6 @@
 <h1>Flight Search</h1>
 <div class="search container">
-  <%= form_for @flight, method: :get do |f| %>
+  <%= form_for @flight, url: root_url, method: :get do |f| %>
     <%= f.label :from_airport_id %>
     <%= f.select(:from_airport_id, options_for_select(@airports)) %><br>
     
@@ -16,5 +16,15 @@
     <%= f.select(:depart_time, options_for_select(@departures)) %><br>
     
     <%= f.submit "Search" %>
+  <% end %>
+</div>
+
+<div>
+  <% if @search_results.any? %>
+    <h2>Passengers: <%= @passenger_count %></h2>
+    <% @search_results.each do |flight| %>
+      <h3>Departing: <%= flight.depart_time.strftime("%b %d, %Y - %l:%M %P") %></h3>
+      <p><strong>Route:</strong> <%= flight.from_airport.code %>-<%= flight.to_airport.code %></p>
+    <% end %>
   <% end %>
 </div>
