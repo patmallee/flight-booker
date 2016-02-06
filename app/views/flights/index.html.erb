@@ -25,7 +25,7 @@
   <div style="margin: 0 30px; padding: 0 0 0 10px; box-shadow: 0 0 3px 3px #aaa; border-radius: 4px">
     <h2>Search Results --- Passengers: <%= @passenger_count %></h2>
     
-    <%= form_for @flight, url: bookings_url, method: :get do |f| %>
+    <%= form_for @flight, url: new_booking_url, method: :get do |f| %>
     
       <%= fields_for :passengers do |p| %>
         <%= p.hidden_field(:count, @passenger_count) %>
