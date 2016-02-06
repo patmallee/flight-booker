@@ -3,8 +3,8 @@ class FlightsController < ApplicationController
   def index
     @flight = Flight.new
     @airports = Airport.all.map { |port| [port.code, port.id] }
-    @departures = Flight.distinct.pluck(:depart_time).map { |date| [date.strftime("%b %d, %Y - %l:%M %P"), date] }
-  
+    @departures = Flight.pluck(:depart_time).sort.map { |date| [date.strftime("%b %d, %Y - %l:%M %P"), date] }
+
     unless params[:flight].nil?
       @search_results = Flight.where("depart_time >= ? AND from_airport_id = ? AND 
                                       to_airport_id = ?", search_params[:depart_time], 
