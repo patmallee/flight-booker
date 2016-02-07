@@ -14,11 +14,11 @@ class BookingsController < ApplicationController
     booking = Booking.create!(booking_params)
     
     flash[:success] = "Flight booked successfully!"
-    redirect_to 'show'
+    redirect_to booking_path(booking.id)
   end
   
   def show
-    
+    @booking = Booking.find(params[:id])
   end
   
   private

@@ -1,0 +1,16 @@
+<h1>Flight Confirmation</h1>
+<h3>Please review your flight details below:</h3>
+
+<h2><%= @booking.flight.from_airport.code %>-<%= @booking.flight.to_airport.code %></h2>
+<p>Departure time: <%= @booking.flight.depart_time %></p>
+<p>Flight duration: <%= @booking.flight.duration %></p>
+
+<h2>Passengers Booked:</h2>
+<ol>
+  <% @booking.passengers.each do |passenger| %>
+    <li><%= passenger.name %></li>
+  <% end %>
+</ol>
+
+<br>
+<%= link_to "Book another flight!", root_url %>
