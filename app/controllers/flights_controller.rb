@@ -2,6 +2,7 @@ class FlightsController < ApplicationController
   
   def index
     @flight = Flight.new
+    @selected_flight = Flight.new
     @airports = Airport.all.map { |port| [port.code, port.id] }
     @departures = Flight.pluck(:depart_time).sort.map { |date| [date.strftime("%b %d, %Y - %l:%M %P"), date] }
 
@@ -10,6 +11,7 @@ class FlightsController < ApplicationController
                                       to_airport_id = ?", search_params[:depart_time], 
                                       search_params[:from_airport_id], search_params[:to_airport_id])
       @passenger_count = search_params[:passengers][:count]
+      @passenger_count.to_i
     end
   end
   
@@ -27,5 +29,5 @@ class FlightsController < ApplicationController
       params.require(:flight).permit(:depart_time, :from_airport_id, :to_airport_id,
                                      passengers: [:count], booking: [:selection])
     end
-  
+    
 end

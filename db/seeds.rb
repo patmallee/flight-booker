@@ -17,8 +17,8 @@ end
 80.times do
   departure_time = Time.now+(rand(10).days)
   duration = (1..5).to_a.sample
-  from_port = (1..20).to_a.sample
-  to_port = (1..20).to_a.sample
+  from_port = (1..6).to_a.sample
+  to_port = (1..6).to_a.sample
   Flight.create(depart_time: departure_time, duration: duration,
                 from_airport_id: from_port, to_airport_id: to_port)
 end

@@ -1,2 +1,38 @@
-<h1>Bookings#new</h1>
-<p>Find me in app/views/bookings/new.html.erb</p>
+<h1>Passenger Information</h1>
+<h5>Please complete the information below for each of your passengers.</h5>
+
+<h3>Your selected flight:</h3>
+<div style="margin:15px">
+  <h4><%= @flight.from_airport.code %>-<%= @flight.to_airport.code %></h4>
+  <p>Departure time: <%= @flight.depart_time %></p>
+  <p>Flight duration: <%= @flight.duration %> hours</p>
+</div>
+
+<div class="form_wrapper">
+  <%= form_for @booking do |f| %>
+    <%= f.hidden_field(:flight_id, :value => @flight.id) %>
+    
+    <% @passengers.each_index do |index| %>
+      <p>Passenger <% "#{index+1}" %></p>
+      <%= fields_for "passenger#{index}" do |p| %>
+        <div style="margin:5px">
+          
+          <%= p.label :name %>
+          <%= p.text_field :name %>
+          
+          <%= p.label :email %>
+          <%= p.text_field :email %>
+          
+          <%= p.hidden_field(:booking_id, :value => @booking.id) %>
+        </div>
+      <% end %>
+    <% end %>
+    
+    <%= f.submit "Book passengers" %>
+    
+  <% end %>
+</div>
+
+<%= params.inspect %><br>
+<%= @passenger_count.inspect %><br>
+<%= @passengers.inspect %>

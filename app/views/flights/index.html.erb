@@ -19,26 +19,22 @@
   <% end %>
 </div>
 
-<p><%= @boobs %></p>
-
 <% unless @search_results.nil? %>
   <div style="margin: 0 30px; padding: 0 0 0 10px; box-shadow: 0 0 3px 3px #aaa; border-radius: 4px">
     <h2>Search Results --- Passengers: <%= @passenger_count %></h2>
     
     <%= form_for @flight, url: new_booking_url, method: :get do |f| %>
-    
+        
       <%= fields_for :passengers do |p| %>
-        <%= p.hidden_field(:count, @passenger_count) %>
+        <%= p.hidden_field(:count, :value => @passenger_count) %>
       <% end %>
       
-      <%= fields_for :booking do |b| %>
-        <% @search_results.each do |flight| %>
-          <%= b.radio_button(:selection, flight.id) %>
-          <div style>
-            <h3>Departing: <%= flight.depart_time.strftime("%b %d, %Y - %l:%M %P") %></h3>
-            <p><strong>Route:</strong> <%= flight.from_airport.code %>-<%= flight.to_airport.code %></p>
-          </div>
-        <% end %>
+      <% @search_results.each do |flight| %>
+        <%= f.radio_button(:id, flight.id) %>
+        <div>
+          <h3>Departing: <%= flight.depart_time.strftime("%b %d, %Y - %l:%M %P") %></h3>
+          <p><strong>Route:</strong> <%= flight.from_airport.code %>-<%= flight.to_airport.code %></p>
+        </div>
       <% end %>
       
       <%= f.submit "Book Flight" %>
@@ -47,3 +43,5 @@
     
 <% end %>
 </div>
+
+<%= params.inspect %><br>
