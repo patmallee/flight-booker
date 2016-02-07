@@ -6,6 +6,11 @@ class FlightsController < ApplicationController
     @airports = Airport.all.map { |port| [port.code, port.id] }
     @departures = Flight.pluck(:depart_time).sort.map { |date| [date.strftime("%b %d, %Y - %l:%M %P"), date] }
 
+    @passenger_count_options = []
+    (1..4).each do |n|
+      @passenger_count_options << ["#{n}", n]
+    end
+
     unless params[:flight].nil?
       @search_results = Flight.where("depart_time >= ? AND from_airport_id = ? AND 
                                       to_airport_id = ?", search_params[:depart_time], 

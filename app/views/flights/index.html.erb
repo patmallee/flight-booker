@@ -10,7 +10,7 @@
     
     <%= f.fields_for :passengers do |p| %>
       <%= p.label :count %>
-      <%= p.select(:count, options_for_select([['1',1],['2',2],['3',3],['4',4]])) %><br>
+      <%= p.select(:count, options_for_select(@passenger_count_options)) %><br>
     <% end %>
     
     <%= f.label :depart_time %>
