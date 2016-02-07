@@ -12,8 +12,6 @@ class BookingsController < ApplicationController
   
   def create
     booking = Booking.create!(booking_params)
-    
-    flash[:success] = "Flight booked successfully!"
     redirect_to booking_path(booking.id)
   end
   
