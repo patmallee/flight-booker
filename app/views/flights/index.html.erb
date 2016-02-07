@@ -1,7 +1,5 @@
 <h1>Flight Search</h1>
 
-<%= flash[:success].inspect unless flash[:success].nil? %>
-
 <div class="search container">
   <%= form_for @flight, url: root_url, method: :get do |f| %>
     <%= f.label :from_airport_id %>
