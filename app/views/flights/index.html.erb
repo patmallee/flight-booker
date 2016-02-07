@@ -1,4 +1,7 @@
 <h1>Flight Search</h1>
+
+<%= flash[:success].inspect unless flash[:success].nil? %>
+
 <div class="search container">
   <%= form_for @flight, url: root_url, method: :get do |f| %>
     <%= f.label :from_airport_id %>
@@ -25,7 +28,7 @@
     
     <%= form_for @flight, url: new_booking_url, method: :get do |f| %>
         
-      <%= fields_for :passengers do |p| %>
+      <%= f.fields_for :passengers do |p| %>
         <%= p.hidden_field(:count, :value => @passenger_count) %>
       <% end %>
       
@@ -43,5 +46,3 @@
     
 <% end %>
 </div>
-
-<%= params.inspect %><br>

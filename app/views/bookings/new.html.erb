@@ -13,17 +13,16 @@
     <%= f.hidden_field(:flight_id, :value => @flight.id) %>
     
     <% @passengers.each_index do |index| %>
-      <p>Passenger <% "#{index+1}" %></p>
-      <%= fields_for "passenger#{index}" do |p| %>
+      <p>Passenger <%= "#{index+1}" %></p>
+      <%= f.fields_for :passengers, Passenger.new do |p| %>
         <div style="margin:5px">
-          
+
           <%= p.label :name %>
           <%= p.text_field :name %>
           
           <%= p.label :email %>
           <%= p.text_field :email %>
           
-          <%= p.hidden_field(:booking_id, :value => @booking.id) %>
         </div>
       <% end %>
     <% end %>
@@ -32,7 +31,3 @@
     
   <% end %>
 </div>
-
-<%= params.inspect %><br>
-<%= @passenger_count.inspect %><br>
-<%= @passengers.inspect %>
